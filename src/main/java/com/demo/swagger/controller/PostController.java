@@ -2,6 +2,7 @@ package com.demo.swagger.controller;
 
 import com.demo.swagger.request.PostRequest;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,10 +18,13 @@ import java.util.Enumeration;
  **/
 @RestController()
 @RequestMapping("post")
-@Tag(name = "post")
+@Tag(name = "post接口", description = "用于管理post接口")
 public class PostController {
-    @Operation(summary = "method1")
+
     @PostMapping("/method1")
+    @Operation(summary = "method1", description = "方法method1")
+    @ApiResponse(responseCode = "200", description = "请求成功")
+    @ApiResponse(responseCode = "500", description = "请求失败")
     public String method1(@RequestBody PostRequest requestParam, HttpServletRequest request) {
         System.out.println(requestParam);
         Enumeration<String> headerNames = request.getHeaderNames();
